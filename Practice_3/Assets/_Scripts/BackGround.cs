@@ -8,13 +8,13 @@ public class BackGround : MonoBehaviour
     float speed;
     int startIndex=2;
     int endIndex=0;
-    float viewHeight;
+    float viewWidth;
     [SerializeField]
     Transform[] sprites;
     bool isMoving = true;
     void Awake()
     {
-        viewHeight = Camera.main.orthographicSize * 2;
+        viewWidth = Camera.main.orthographicSize * 2 * Camera.main.aspect;
     }
 
     public void checkMove(bool check)
@@ -27,14 +27,14 @@ public class BackGround : MonoBehaviour
         if(!isMoving)
             return;
         Vector3 curPosition = transform.position;
-        Vector3 nextPosition = Vector3.down * speed * Time.deltaTime;
+        Vector3 nextPosition = Vector3.left * speed * Time.deltaTime;
         transform.position = curPosition + nextPosition;
 
-        if(sprites[endIndex].position.y < viewHeight*(-1))
+        if(sprites[endIndex].position.x < viewWidth*(-1))
         {
             Vector3 backSpritePosition = sprites[startIndex].localPosition;
             Vector3 frontSpritePosition = sprites[endIndex].localPosition;
-            sprites[endIndex].transform.localPosition = backSpritePosition + Vector3.up * viewHeight;
+            sprites[endIndex].transform.localPosition = backSpritePosition + Vector3.right * viewWidth * 0.9f;
 
             int temp = startIndex;
             startIndex = endIndex;
