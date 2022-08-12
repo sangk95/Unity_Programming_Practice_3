@@ -10,20 +10,16 @@ public class EnemyFactory : UnitFactory
     {
         this.defaultPoolSize = defaultPoolSize;
         Enemy enemy = null;
-        switch(name)
+        Unit temp = null;
+        foreach(var obj in unit)
         {
-            case "Enemy_A":
-                enemy =  CreateUnits(unit[0], name);
+            if(obj.name == name)
+            {
+                temp = obj;
                 break;
-            case "Enemy_B":
-                enemy = CreateUnits(unit[1], name);
-                break;
-            case "Enemy_C":
-                enemy = CreateUnits(unit[2], name);
-                break;
-            default:
-                break;
+            }
         }
+        enemy =  CreateUnits(temp, name);
         return enemy;
     }
     

@@ -382,6 +382,7 @@
 "Assets/_Scripts/EnemyFactory.cs"
 "Assets/_Scripts/EnemyManager.cs"
 "Assets/_Scripts/Player.cs"
+"Assets/_Scripts/PlayerFactory.cs"
 "Assets/_Scripts/Unit.cs"
 "Assets/_Scripts/UnitFactory.cs"
 -langversion:9.0

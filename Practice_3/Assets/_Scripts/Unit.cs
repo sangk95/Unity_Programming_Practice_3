@@ -46,10 +46,6 @@ public abstract class Unit : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(transform.forward, dir);
         isActivated = true;
     }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-    }
     public void DestroySelf()
     {
         isActivated = false;
