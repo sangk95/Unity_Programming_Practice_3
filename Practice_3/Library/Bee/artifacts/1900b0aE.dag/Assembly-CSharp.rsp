@@ -378,6 +378,12 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Free Pixel Art Forest/Demo/MoveBackground.cs"
 "Assets/_Scripts/BackGround.cs"
+"Assets/_Scripts/Enemy.cs"
+"Assets/_Scripts/EnemyFactory.cs"
+"Assets/_Scripts/EnemyManager.cs"
+"Assets/_Scripts/Player.cs"
+"Assets/_Scripts/Unit.cs"
+"Assets/_Scripts/UnitFactory.cs"
 -langversion:9.0
 
 /deterministic
