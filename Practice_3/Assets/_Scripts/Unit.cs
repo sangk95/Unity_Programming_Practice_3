@@ -6,25 +6,23 @@ using System;
 [RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D))]
 public abstract class Unit : MonoBehaviour
 {
-    Vector3 targetPosition;    
+    Animator animator;
     bool isActivated = false;
     int maxHp;
     protected int curHp;
     int ATKDamage;
-    float moveSpeed; 
     float attackDelay = 0.5f;
     BoxCollider2D box;
     Rigidbody2D body;
     public Action<Unit> Destroyed;
     bool isInitialized = false;
 
-    public void Initialize(int maxHp, int ATKDamage, float Speed = 0.5f)
+    public void Initialize(int maxHp, int ATKDamage)
     {
         if(isInitialized)
             return;
         this.maxHp = maxHp;
         this.ATKDamage = ATKDamage;
-        this.moveSpeed = Speed;
         curHp = maxHp;
 
         isInitialized = true;
@@ -35,15 +33,19 @@ public abstract class Unit : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         body.bodyType = RigidbodyType2D.Kinematic;
         box.isTrigger = true; 
+        animator = GetComponentInChildren<Animator>();
     }
-    public void Activate(Vector3 startPosition, Vector3 targetPosition)
+    public void OnWalk()
+    {
+        animator.SetBool("isMoving", true);
+    }
+    public void OnAttack()
+    {
+        animator.SetTrigger("attack");
+    }
+    public void Activate(Vector3 startPosition)
     {
         transform.position = startPosition;
-        this.targetPosition = targetPosition;
-        if(!isActivated)
-            transform.rotation = Quaternion.Euler(0,0,180);
-        Vector3 dir = (targetPosition - startPosition).normalized;
-        transform.rotation = Quaternion.LookRotation(transform.forward, dir);
         isActivated = true;
     }
     public void DestroySelf()
