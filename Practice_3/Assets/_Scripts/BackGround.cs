@@ -11,12 +11,16 @@ public class BackGround : MonoBehaviour
     float viewWidth;
     [SerializeField]
     Transform[] sprites;
-    bool isMoving = true;
+    bool isMoving = false;
     void Awake()
     {
         viewWidth = Camera.main.orthographicSize * 2 * Camera.main.aspect;
     }
 
+    public void GameStart()
+    {
+        checkMove(true);
+    }
     public void checkMove(bool check)
     {
         isMoving = check;

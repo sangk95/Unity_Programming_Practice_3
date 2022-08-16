@@ -19,18 +19,16 @@ public class PlayerManager : MonoBehaviour
     }
     void Start()
     {
-        
-    }
-
-    public void GameStart()
-    {   
         //------------------------------Select Player를 통해 리스트 전달하기로 변경--------------------------//
         List<string> list = new List<string>();
         list.Add("Player01");
         list.Add("Player02");
         list.Add("Player03");
         playerSpawner.SetPlayerList(list);
+    }
 
+    public void GameStart()
+    {   
         playerSpawner.GameStart();
     }
 }

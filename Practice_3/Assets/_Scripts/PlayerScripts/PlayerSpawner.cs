@@ -22,12 +22,16 @@ public class PlayerSpawner
 
     public void GameStart()
     {
-        SpawnPlayer();
+        foreach(var unit in players)
+        {
+            unit.OnWalk();
+        }
     }
     
     public void SetPlayerList(List<string> list)
     {
         this.list = list;
+        SpawnPlayer();
     }
     
     void SpawnPlayer()
@@ -43,7 +47,6 @@ public class PlayerSpawner
                     unit.Initialize(int.Parse(data.HP), int.Parse(data.ATK));
                     
                     unit.Activate(new Vector3(-1-i, 0, 0));
-                    unit.OnWalk();
 
                     unit.Destroyed += this.OnPlayerDestroyed;
                     players.Add(unit);
