@@ -2318,6 +2318,8 @@ MonoBehaviour:
   - {fileID: -9187162406417964538, guid: 717317a4f26eee14da4d79b33e8f53c5, type: 3}
   - {fileID: -2767617821030552728, guid: c9bf4ce1d7bda3a428f93abb34b9bd54, type: 3}
   - {fileID: -7951534379507627592, guid: 31bc089e98e3fd64e9e06f182aff5291, type: 3}
+  - {fileID: -7951534379507627592, guid: ebd473a5416ca754ab5cd3c3e7c6e570, type: 3}
+  - {fileID: -7951534379507627592, guid: 7ede471faccc21f4aa1202be2391ab80, type: 3}
   playerStatData: {fileID: 4900000, guid: 438a26b2d42316e43a6eb5dc7a1b590e, type: 3}
 --- !u!4 &1328809011
 Transform:

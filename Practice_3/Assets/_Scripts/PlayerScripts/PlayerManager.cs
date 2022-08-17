@@ -11,20 +11,17 @@ public class PlayerManager : MonoBehaviour
     PlayerDatabase playerData;
     PlayerFactory playerFactory;
     PlayerSpawner playerSpawner;
+    SelectManager selectManager;
     void Awake()
     {
+        selectManager = GameObject.Find("SelectManager").GetComponent<SelectManager>();
         playerData = new PlayerDatabase(playerStatData);
         playerFactory = new PlayerFactory();
         playerSpawner = new PlayerSpawner(playerData, playerFactory, playerPrefabs);
     }
     void Start()
     {
-        //------------------------------Select Player를 통해 리스트 전달하기로 변경--------------------------//
-        List<string> list = new List<string>();
-        list.Add("Player01");
-        list.Add("Player02");
-        list.Add("Player03");
-        playerSpawner.SetPlayerList(list);
+        playerSpawner.SetPlayerList(selectManager.GetCharacterList);
     }
 
     public void GameStart()

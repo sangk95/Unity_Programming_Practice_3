@@ -18,13 +18,13 @@ MonoBehaviour:
     isPlayable: 0
   - name: Player02
     sprite: {fileID: 511124573, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
-    isPlayable: 1
+    isPlayable: 0
   - name: Player03
     sprite: {fileID: 988959124, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
     isPlayable: 0
   - name: Player04
     sprite: {fileID: 1813969021, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
-    isPlayable: 1
+    isPlayable: 0
   - name: Player05
     sprite: {fileID: 40532584, guid: 0c1e734fa85636743af3bc22c6d99ba8, type: 3}
-    isPlayable: 1
+    isPlayable: 0
