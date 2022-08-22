@@ -6,16 +6,21 @@ using System;
 [RequireComponent(typeof(BoxCollider2D), typeof(Rigidbody2D))]
 public abstract class Unit : MonoBehaviour
 {
+    protected bool canAttack = true;
+    protected float elapsedTime = 0.5f;
+    protected bool isClosed = false;
     Animator animator;
-    bool isActivated = false;
+    protected bool isActivated = false;
     int maxHp;
     protected int curHp;
-    int ATKDamage;
-    float attackDelay = 0.5f;
+    protected int ATKDamage;
+    protected float attackDelay = 0.5f;
     BoxCollider2D box;
     Rigidbody2D body;
     public Action<Unit> Destroyed;
     bool isInitialized = false;
+
+    public bool GetActivate => isActivated;
 
     public void Initialize(int maxHp, int ATKDamage)
     {
@@ -56,10 +61,11 @@ public abstract class Unit : MonoBehaviour
     }
     protected IEnumerator KnockBack()
     {   
+        isClosed = false;
         float elapsedTime=0f;
         while(elapsedTime < 0.1f)
         {
-            this.transform.Translate(this.transform.forward * 5 * Time.deltaTime);
+            this.transform.Translate(this.transform.right * 5 * Time.deltaTime);
             elapsedTime+=Time.deltaTime;
             yield return null;
         }

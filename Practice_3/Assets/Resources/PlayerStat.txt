@@ -1,6 +1,6 @@
 Name	HP	ATK
-Player01	5	3
-Player02	8	2
-Player03	3	5
-Player04	10	1
-Player05	6	6
+Player01	10	3
+Player02	12	2
+Player03	8	5
+Player04	20	1
+Player05	100	100

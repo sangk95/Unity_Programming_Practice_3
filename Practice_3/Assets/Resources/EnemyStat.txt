@@ -1,0 +1,6 @@
+Name	HP	ATK
+Enemy01	3	1
+Enemy02	4	2
+Enemy03	5	2
+Enemy04	6	3
+Enemy05	7	3

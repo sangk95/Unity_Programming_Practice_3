@@ -1,0 +1,7 @@
+Stage	Wave	Name	Count
+1	1	Enemy01	5
+1	2	Enemy01	3
+1	2	Enemy02	2
+1	3	Enemy02	3
+1	3	Enemy03	2
+1	4	Enemy03	5

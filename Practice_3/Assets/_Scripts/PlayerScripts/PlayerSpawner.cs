@@ -1,28 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerSpawner
 {
     PlayerDatabase playerData;
     PlayerFactory playerFactory;
-    Unit[] playerPrefabs;
+    Player[] playerPrefabs;
+    Transform[] playerPosition;
     List<string> list = new List<string>();
-    List<Unit> players = new List<Unit>();
-    public PlayerSpawner(PlayerDatabase playerData, PlayerFactory playerFactory, Unit[] playerPrefabs)
+    List<Player> playerList = new List<Player>();
+    public Action<Player> RespawnedPlayer;
+    public List<Player> GetPlayerList => playerList;
+    public PlayerSpawner(PlayerDatabase playerData, PlayerFactory playerFactory, Player[] playerPrefabs, Transform[] playerPosition)
     {
         this.playerData = playerData;
         this.playerFactory = playerFactory;
         this.playerPrefabs = playerPrefabs;
+        this.playerPosition = playerPosition;
 
         Debug.Assert(this.playerData != null, "PlayerDatabase is null!");
         Debug.Assert(this.playerFactory != null, "PlayerFactory is null!");
         Debug.Assert(this.playerPrefabs != null, "PlayerPrefabs is null!");
+        Debug.Assert(this.playerPosition != null, "PlayerPosition is null!");
     }
 
     public void GameStart()
     {
-        foreach(var unit in players)
+        foreach(var unit in playerList)
         {
             unit.OnWalk();
         }
@@ -37,30 +42,39 @@ public class PlayerSpawner
     void SpawnPlayer()
     {
         Unit unit = null;
-        for(int i=0 ; i<list.Count ; i++)
+        int positionNum=0;
+        for(int i=list.Count-1 ; i>=0 ; i--)
         {
-            unit = playerFactory.GetUnit(playerPrefabs, list[i]);
+            bool findUnit = false;
             foreach(var data in playerData.GetPlayerStatData)
             {
                 if(data.Name == list[i])
                 {
+                    unit = playerFactory.GetUnit(playerPrefabs, list[i]);
                     unit.Initialize(int.Parse(data.HP), int.Parse(data.ATK));
                     
-                    unit.Activate(new Vector3(-1-i, 0, 0));
-
-                    unit.Destroyed += this.OnPlayerDestroyed;
-                    players.Add(unit);
+                    unit.Activate(playerPosition[positionNum].position);
+                    
+                    playerList.Add(unit as Player);
+                    findUnit = true;
                 }
             }
+            if(findUnit)
+                positionNum++;
         }
     }
 
-    void OnPlayerDestroyed(Unit unit) 
+    public void RespawnPlayer(Player player)
     {
-        unit.Destroyed -= this.OnPlayerDestroyed;
-        int index = players.IndexOf(unit);
-        players.RemoveAt(index);
-        playerFactory.OnDestroy(unit);
+        string reName = player.name.Replace("(Clone)","");
+        Unit unit = null;
+        unit = playerFactory.GetUnit(playerPrefabs, reName);
+        foreach(var data in playerData.GetPlayerStatData)
+            if(data.Name == reName)
+                unit.Initialize(int.Parse(data.HP), int.Parse(data.ATK));
+        unit.Activate(new Vector3(-5.5f,0,0));
+        unit.OnWalk();
+    
+        RespawnedPlayer?.Invoke(unit as Player);
     }
-
 }

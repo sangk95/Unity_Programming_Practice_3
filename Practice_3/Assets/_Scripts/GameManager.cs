@@ -8,9 +8,12 @@ public class GameManager : MonoBehaviour
     BackGround[] backGrounds;
     [SerializeField]
     PlayerManager playerManager;
+    [SerializeField]
+    EnemyManager enemyManager;
     TimeManager timeManager;
     void Awake()
     {
+        Application.targetFrameRate = 60;
         timeManager = gameObject.AddComponent<TimeManager>();
 
         BindEvents();
@@ -19,7 +22,10 @@ public class GameManager : MonoBehaviour
 
     void BindEvents()
     {
+        playerManager.PlayerAttack += enemyManager.OnAttacked;
+        enemyManager.EnemyAttack += playerManager.OnAttacked;
         timeManager.GameStarted += playerManager.GameStart;
+        timeManager.GameStarted += enemyManager.GameStart;
         foreach(var back in backGrounds)
         {
             timeManager.GameStarted += back.GameStart;
@@ -28,7 +34,10 @@ public class GameManager : MonoBehaviour
 
     void UnBindEvents()
     {
+        playerManager.PlayerAttack -= enemyManager.OnAttacked;
+        enemyManager.EnemyAttack -= playerManager.OnAttacked;
         timeManager.GameStarted -= playerManager.GameStart;
+        timeManager.GameStarted -= enemyManager.GameStart;
         foreach(var back in backGrounds)
         {
             timeManager.GameStarted -= back.GameStart;

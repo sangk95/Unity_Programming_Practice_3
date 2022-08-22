@@ -46,8 +46,9 @@ public class EnemyDatabase
 
         return EnemyTypeCount;
     }
-    public EnemyDatabase(TextAsset enemySpawnDatabase, TextAsset enemyStatDatabase)
+    public EnemyDatabase(int curStage, TextAsset enemySpawnDatabase, TextAsset enemyStatDatabase)
     {
+        this.curStage = curStage;
         this.enemySpawnDatabase = enemySpawnDatabase;
         this.enemyStatDatabase = enemyStatDatabase;
 
