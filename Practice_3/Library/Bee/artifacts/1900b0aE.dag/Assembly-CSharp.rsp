@@ -398,6 +398,7 @@
 "Assets/_Scripts/SelectCharacter.cs"
 "Assets/_Scripts/SelectManager.cs"
 "Assets/_Scripts/TimeManager.cs"
+"Assets/_Scripts/UIRoot.cs"
 "Assets/_Scripts/Unit.cs"
 -langversion:9.0
 

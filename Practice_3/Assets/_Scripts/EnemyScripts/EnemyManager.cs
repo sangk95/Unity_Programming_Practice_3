@@ -14,7 +14,9 @@ public class EnemyManager : MonoBehaviour
     EnemyFactory enemyFactory;
     EnemyDatabase enemyDatabase;
     EnemySpawner enemySpawner;
+    public Action WaveStarted;
     public Action<int> EnemyAttack;
+    public Action<bool> IsMovingToNextWave;
     void Awake()
     {
         enemyFactory = new EnemyFactory();
@@ -27,20 +29,23 @@ public class EnemyManager : MonoBehaviour
     public void GameStart()
     {
         enemySpawner.Gamestart();
-        enemySpawner.AttackPlayer += this.OnAttack;
-    }
-    void OnAttack(int damage)
-    {
-        EnemyAttack?.Invoke(damage);
+        enemySpawner.AttackPlayer += this.EnemyAttack;
+        enemySpawner.MovingToNextWave += this.IsMovingToNextWave;
+        enemySpawner.WaveStarted += this.WaveStarted;
+        
+        WaveStarted?.Invoke();
+        IsMovingToNextWave?.Invoke(false);
     }
     public void OnAttacked(Unit unit, int damage)
     {
         enemySpawner.OnEnemyAttacked(unit, damage);
-    }   
+    }
 
     void UnBindEvents()
     {
-        enemySpawner.AttackPlayer -= this.OnAttack; 
+        enemySpawner.AttackPlayer -= this.EnemyAttack; 
+        enemySpawner.MovingToNextWave -= this.IsMovingToNextWave;
+        enemySpawner.WaveStarted -= this.WaveStarted;
     }
     void OnDestroy()
     {

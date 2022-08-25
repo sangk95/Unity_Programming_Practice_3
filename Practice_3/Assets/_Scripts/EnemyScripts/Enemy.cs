@@ -51,10 +51,12 @@ public class Enemy : Unit
     public void StopMove()
     {
         isClosed = true;
+        OnIdle();
     }
     public void StartMove()
     {
         isClosed = false;
+        OnWalk();
     }
     void FixedUpdate()
     {

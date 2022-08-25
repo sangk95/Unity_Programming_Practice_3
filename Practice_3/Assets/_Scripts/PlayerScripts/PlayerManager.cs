@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     PlayerController playerController;
     SelectManager selectManager;
     List<Player> playerList = new List<Player>();
+    public Action PlayerDead;
     public Action<Unit, int> PlayerAttack;
     void Awake()
     {
@@ -31,25 +32,27 @@ public class PlayerManager : MonoBehaviour
 
     public void GameStart()
     {   
-        playerSpawner.GameStart();
         playerList = playerSpawner.GetPlayerList;
         playerController = gameObject.AddComponent<PlayerController>();
         playerController.Initialize(playerSpawner, playerFactory, playerPosition);
-        playerController.AttackEnemy += this.OnAttack;
+        playerController.AttackEnemy += this.PlayerAttack;
+        playerController.Dead += this.PlayerDead;
         playerController.NeedRespawn += playerSpawner.RespawnPlayer;
         playerSpawner.RespawnedPlayer += playerController.RespawnPlayer;
     }
-    void OnAttack(Unit unit, int damage)
-    {
-        PlayerAttack?.Invoke(unit, damage);
-    }
+
     public void OnAttacked(int damage)
     {
         playerController.OnAttacked(damage);
     }
+    public void IsMoving(bool check)
+    {
+        playerController.IsMoving(check);
+    }
     void UnBindEvents()
     {
-        playerController.AttackEnemy -= this.OnAttack;
+        playerController.AttackEnemy -= this.PlayerAttack;
+        playerController.Dead -= this.PlayerDead;
         playerController.NeedRespawn -= playerSpawner.RespawnPlayer;
         playerSpawner.RespawnedPlayer -= playerController.RespawnPlayer;
     }

@@ -25,13 +25,6 @@ public class PlayerSpawner
         Debug.Assert(this.playerPosition != null, "PlayerPosition is null!");
     }
 
-    public void GameStart()
-    {
-        foreach(var unit in playerList)
-        {
-            unit.OnWalk();
-        }
-    }
     
     public void SetPlayerList(List<string> list)
     {
@@ -54,6 +47,7 @@ public class PlayerSpawner
                     unit.Initialize(int.Parse(data.HP), int.Parse(data.ATK));
                     
                     unit.Activate(playerPosition[positionNum].position);
+                    unit.OnWalk();
                     
                     playerList.Add(unit as Player);
                     findUnit = true;

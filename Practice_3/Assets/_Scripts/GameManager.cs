@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     PlayerManager playerManager;
     [SerializeField]
     EnemyManager enemyManager;
+    [SerializeField]
+    UIRoot uIRoot;
     TimeManager timeManager;
     void Awake()
     {
@@ -23,25 +25,29 @@ public class GameManager : MonoBehaviour
     void BindEvents()
     {
         playerManager.PlayerAttack += enemyManager.OnAttacked;
+        playerManager.PlayerDead += uIRoot.DeathCounting;
         enemyManager.EnemyAttack += playerManager.OnAttacked;
+        enemyManager.WaveStarted += uIRoot.OnWaveChanged;
+        enemyManager.IsMovingToNextWave += playerManager.IsMoving;
+        foreach(var back in backGrounds)
+            enemyManager.IsMovingToNextWave += back.checkMove;
         timeManager.GameStarted += playerManager.GameStart;
         timeManager.GameStarted += enemyManager.GameStart;
-        foreach(var back in backGrounds)
-        {
-            timeManager.GameStarted += back.GameStart;
-        }
+        timeManager.GameStarted += uIRoot.OnGameStarted;
     }
 
     void UnBindEvents()
     {
         playerManager.PlayerAttack -= enemyManager.OnAttacked;
+        playerManager.PlayerDead -= uIRoot.DeathCounting;
         enemyManager.EnemyAttack -= playerManager.OnAttacked;
+        enemyManager.WaveStarted -= uIRoot.OnWaveChanged;
+        enemyManager.IsMovingToNextWave -= playerManager.IsMoving;
+        foreach(var back in backGrounds)
+            enemyManager.IsMovingToNextWave -= back.checkMove;
         timeManager.GameStarted -= playerManager.GameStart;
         timeManager.GameStarted -= enemyManager.GameStart;
-        foreach(var back in backGrounds)
-        {
-            timeManager.GameStarted -= back.GameStart;
-        }
+        timeManager.GameStarted -= uIRoot.OnGameStarted;
     }
 
     void OnDestroy()

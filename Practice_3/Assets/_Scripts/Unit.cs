@@ -40,6 +40,10 @@ public abstract class Unit : MonoBehaviour
         box.isTrigger = true; 
         animator = GetComponentInChildren<Animator>();
     }
+    public void OnIdle()
+    {
+        animator.SetBool("isMoving", false);
+    }
     public void OnWalk()
     {
         animator.SetBool("isMoving", true);

@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     public Action NextStage;
     public Action WaveEnd;
     public Action<bool> MovingToNextWave;
-    public Action<int> WaveStarted;
+    public Action WaveStarted;
     public Action<int> AttackPlayer;
     
     List<Enemy> enemies = new List<Enemy>();
@@ -59,7 +59,6 @@ public class EnemySpawner : MonoBehaviour
         currentEnemyCount = 0;
         StartCoroutine(AutoSpawnEnemy());
         MovingToNextWave?.Invoke(false);
-        WaveStarted?.Invoke(currentWave+1);
     }
 
     
@@ -81,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
                     MovingToNextWave?.Invoke(true);
                     yield return new WaitForSeconds(waveInterval);
                     MovingToNextWave?.Invoke(false);
-                    WaveStarted?.Invoke(currentWave+1);
+                    WaveStarted?.Invoke();
                     currentEnemyCount = 0;
                     NextStage?.Invoke();
                     isSpawning = false;
