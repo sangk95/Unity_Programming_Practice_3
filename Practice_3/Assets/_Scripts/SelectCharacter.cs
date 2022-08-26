@@ -27,7 +27,7 @@ public class SelectCharacter : MonoBehaviour
                 temp = "Player0"+(i+1);
             else
                 temp = "Player"+(i+1);
-            if(characterStorage.GetPlayable(temp) == IsPlayable.Playable)
+            if(DataController.Instance.gameData.PlayableData[temp] == true)
                 characterImages[i].sprite = characterStorage.GetSprite(temp);
 
             else
@@ -51,7 +51,7 @@ public class SelectCharacter : MonoBehaviour
         GameObject select = EventSystem.current.currentSelectedGameObject;
         foreach(var image in characterImages)
         {
-            if(image.gameObject == select)
+        if(DataController.Instance.gameData.PlayableData[image.sprite.name] == true && image.gameObject == select)
             {
                 selectedImage = select.GetComponent<Image>().sprite;
                 break;

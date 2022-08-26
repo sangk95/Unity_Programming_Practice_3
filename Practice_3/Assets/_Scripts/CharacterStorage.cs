@@ -26,26 +26,6 @@ public class CharacterStorage : ScriptableObject
         }
         return dicCharacter[name];
     }
-    public IsPlayable GetPlayable(string name)
-    {
-        foreach(var data in characterSrcs)
-        {
-            if(name == data.GetName)
-                return data.GetPlayable;
-        }
-        return IsPlayable.NonPlayable;
-    }
-    public void SetPlayable(string name)
-    {
-        foreach(var data in characterSrcs)
-        {
-            if(name == data.GetName)
-            {
-                data.SetPlayable(IsPlayable.Playable);
-                break;
-            }
-        }
-    }
 }
 [Serializable]
 public struct CharacterSrc
@@ -54,15 +34,7 @@ public struct CharacterSrc
     string name;
     [SerializeField]
     Sprite sprite;
-    [SerializeField]
-    IsPlayable isPlayable; 
 
     public string GetName => name;
     public Sprite GetSprite => sprite;
-    public IsPlayable GetPlayable => isPlayable;
-    public void SetPlayable(IsPlayable isPlayable){this.isPlayable = isPlayable;}
 }
-public enum IsPlayable
-{
-    Playable, NonPlayable
-} 
