@@ -24,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     public Action<bool> MovingToNextWave;
     public Action WaveStarted;
     public Action<int> AttackPlayer;
+    public Action GameEnded;
     
     List<Enemy> enemies = new List<Enemy>();
     Dictionary<string, int> EnemyTypeCount = new Dictionary<string, int>();
@@ -75,7 +76,10 @@ public class EnemySpawner : MonoBehaviour
                     WaveEnd?.Invoke();
                     currentWave++;
                     if(currentWave >= maxWave)
+                    {
+                        GameEnded?.Invoke();
                         yield break;
+                    }
                     waveEnemyCount = CurWaveEnemyCount();
                     MovingToNextWave?.Invoke(true);
                     yield return new WaitForSeconds(waveInterval);

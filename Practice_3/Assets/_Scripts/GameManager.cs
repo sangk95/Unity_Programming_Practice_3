@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         enemyManager.EnemyAttack += playerManager.OnAttacked;
         enemyManager.WaveStarted += uIRoot.OnWaveChanged;
         enemyManager.IsMovingToNextWave += playerManager.IsMoving;
+        enemyManager.GameEnded += uIRoot.OnGameEnded;
         foreach(var back in backGrounds)
             enemyManager.IsMovingToNextWave += back.checkMove;
         timeManager.GameStarted += playerManager.GameStart;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
         enemyManager.EnemyAttack -= playerManager.OnAttacked;
         enemyManager.WaveStarted -= uIRoot.OnWaveChanged;
         enemyManager.IsMovingToNextWave -= playerManager.IsMoving;
+        enemyManager.GameEnded -= uIRoot.OnGameEnded;
         foreach(var back in backGrounds)
             enemyManager.IsMovingToNextWave -= back.checkMove;
         timeManager.GameStarted -= playerManager.GameStart;
@@ -54,4 +56,5 @@ public class GameManager : MonoBehaviour
     {
         UnBindEvents();   
     }
+
 }

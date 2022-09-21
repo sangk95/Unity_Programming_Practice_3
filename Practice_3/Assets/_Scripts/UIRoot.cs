@@ -10,12 +10,15 @@ public class UIRoot : MonoBehaviour
     TMP_Text deathCountUI; 
     [SerializeField]
     TMP_Text waveUI;
+    [SerializeField]
+    TMP_Text mainUI;
     int curWave=0;
     int deathCount=0;
     void Start()
     {
         deathCountUI.gameObject.SetActive(false);
         waveUI.gameObject.SetActive(false);
+        mainUI.gameObject.SetActive(false);
     }
     public void OnGameStarted()
     {
@@ -35,6 +38,12 @@ public class UIRoot : MonoBehaviour
         waveUI.gameObject.SetActive(true);
         waveUI.text = string.Format("Wave {0}", curWave);
         StartCoroutine(Delay());
+    }
+
+    public void OnGameEnded()
+    {
+        mainUI.gameObject.SetActive(true);
+        mainUI.text = string.Format("Victory!\nDeath : {0}",deathCount);
     }
 
     IEnumerator Delay()

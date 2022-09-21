@@ -15,6 +15,7 @@ public class EnemyManager : MonoBehaviour
     EnemyDatabase enemyDatabase;
     EnemySpawner enemySpawner;
     public Action WaveStarted;
+    public Action GameEnded;
     public Action<int> EnemyAttack;
     public Action<bool> IsMovingToNextWave;
     void Awake()
@@ -32,6 +33,7 @@ public class EnemyManager : MonoBehaviour
         enemySpawner.AttackPlayer += this.EnemyAttack;
         enemySpawner.MovingToNextWave += this.IsMovingToNextWave;
         enemySpawner.WaveStarted += this.WaveStarted;
+        enemySpawner.GameEnded += this.GameEnded;
         
         WaveStarted?.Invoke();
         IsMovingToNextWave?.Invoke(false);
@@ -46,6 +48,7 @@ public class EnemyManager : MonoBehaviour
         enemySpawner.AttackPlayer -= this.EnemyAttack; 
         enemySpawner.MovingToNextWave -= this.IsMovingToNextWave;
         enemySpawner.WaveStarted -= this.WaveStarted;
+        enemySpawner.GameEnded -= this.GameEnded;
     }
     void OnDestroy()
     {
