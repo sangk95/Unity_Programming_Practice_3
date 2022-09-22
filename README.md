@@ -1,2 +1,12 @@
-# Unity_Programming_Practice_3
-Trying -> Player List - Status - Select - Play
+# 오토 던전
+## 프로젝트 설명
+본 프로젝트는 게임 회사 클라이언트 직군 구직용으로 사용할 개인 포트폴리오입니다.
+ - 제작 기간 : 2022년 8월 11일 ~ 8월 26일
+ - Client : Unity
+ - 이메일 : jwjw1224@gmail.com
+## 주요기능
+- 스포너 - 팩토리
+- 오브젝트 풀링
+- 캐릭터 선택/배치
+- 이벤트 주도적 프로그래밍
+- 캐릭터/몬스터 데이터 로컬 연동
