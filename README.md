@@ -4,6 +4,7 @@
  - 제작 기간 : 2022년 8월 11일 ~ 8월 26일
  - Client : Unity
  - 이메일 : jwjw1224@gmail.com
+ - 동영상 : https://youtu.be/h_Jk72lzlsg
 ## 주요기능
 - 스포너 - 팩토리
 - 오브젝트 풀링
